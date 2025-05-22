@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import logoInImg from '../assets/login.png';
+import logoInImg from '../assets/Login.png'; // Import your logo image
 import axios from 'axios';
 import { backendUrl } from '../App';
 import { toast } from 'react-toastify';
