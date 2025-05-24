@@ -92,24 +92,25 @@ const updateQuantity = async (itemId, size, quantity) => {
 
 
 //getting cart amount
-const getCartAmount=()=>{
-  let totalAmount=0
-  for (const items in cartItems)
-  {
-    let filtered =foods.find((food)=>food._id===items)
-    for(const item in cartItems[items]){
-      try{
-        if(cartItems[items][item] > 0){
-          totalAmount+=filtered.price[item] + cartItems[items][item]
+//getting cart amount
+const getCartAmount = () => {
+  let totalAmount = 0;
+  for (const itemId in cartItems) {
+    const food = foods.find((food) => food._id === itemId);
+    if (!food || !food.price) continue;
+    for (const size in cartItems[itemId]) {
+      try {
+        const quantity = cartItems[itemId][size];
+        const price = Number(food.price[size]);
+        if (quantity > 0 && !isNaN(price)) {
+          totalAmount += price * quantity;
         }
+      } catch (error) {
+        console.log(error);
       }
-    catch(error){
-      console.log(error)
     }
   }
-
-}
-return totalAmount
+  return totalAmount;
 }
 //getting all food data
 const getProductsData = async () => {

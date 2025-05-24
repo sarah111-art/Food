@@ -33,27 +33,29 @@ const Menu = () => {
     }
     return filtered
   }
+const applySorting = (foodsList) => {
+  const sortedFoods = [...foodsList];
 
-  const applySorting=(foodsList)=>{
-    const sortedFoods=[...foodsList]
+  switch (sortType) {
+    case "low":
+      return sortedFoods.sort((a, b) => {
+        const aPrice = a.price ? Object.values(a.price)[0] : 0;
+        const bPrice = b.price ? Object.values(b.price)[0] : 0;
+        return aPrice - bPrice;
+      });
 
-    switch(sortType){
-      case"low":
-      return sortedFoods.sort((a,b)=>{
-        const aPrice=Object.values(a.price)[0]
-        const bPrice=Object.values(b.price)[0]
-        return aPrice - bPrice
-      })
-      case "high":
-        return sortedFoods.sort((a,b)=>{
-          const aPrice=Object.values(a.price)[0]
-          const bPrice=Object.values(b.price)[0]
-          return bPrice - aPrice
-        });
-        default:
-          return sortedFoods
-    }
+    case "high":
+      return sortedFoods.sort((a, b) => {
+        const aPrice = a.price ? Object.values(a.price)[0] : 0;
+        const bPrice = b.price ? Object.values(b.price)[0] : 0;
+        return bPrice - aPrice;
+      });
+
+    default:
+      return sortedFoods;
   }
+};
+
 
 const toggleShowCategories=()=>{
   setShowCategories(!showCategories)

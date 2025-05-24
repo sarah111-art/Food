@@ -5,10 +5,11 @@ import Title from '../components/Title'
 import { ShopContext } from '../context/ShopContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const PlaceOrder = () => {
   const {
-    navigate,
+   
     backendUrl,
     cartItems,
     setCartItems,
@@ -17,6 +18,7 @@ const PlaceOrder = () => {
     delivery_charge,
     token
   } = useContext(ShopContext)
+    const navigate = useNavigate();
 
   const [method, setMethod] = useState('cod')
   const [formData, setFormData] = useState({
