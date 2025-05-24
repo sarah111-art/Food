@@ -19,6 +19,8 @@ const userSchema = mongoose.Schema(
       type: Object,
       default: {},
     },
+    resetToken: { type: String },          
+    resetTokenExpiry: { type: Number }, 
   },
   {
     minimize: false,

@@ -186,12 +186,16 @@ const UpdateStatus = async (req, res) => {
 }
 
 const verifyStripe = async (req, res) => {
-  const { success, orderId,userId } = req.query
+  const { success, orderId, userId } = req.body
   try {
-    if(success==="true")
-      await orderModel.findByIdAndUpdate(userId, { payment: true })
-      await userModel.findByIdAndUpdate(userId, { cartData: {}  })
-    res.json({ success: true, message: 'Payment Successful' })
+    if (success === "true") {
+      await orderModel.findByIdAndUpdate(orderId, { payment: true })
+      await userModel.findByIdAndUpdate(userId, { cartData: {} })
+      res.json({ success: true, message: 'Payment Successful' })
+    } else {
+      await orderModel.findByIdAndDelete(orderId)
+      res.json({ success: false, message: 'Payment Failed' })
+    }
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message })
