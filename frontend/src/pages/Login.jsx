@@ -263,7 +263,7 @@ const Login = () => {
 
             <div
               onClick={() => navigate('/forgot-password')}
-              className="text-center text-sm my-4 cursor-pointer text-blue-600 underline"
+              className="text-center text-sm my-4 cursor-pointer underline text-blue-600 "
             >
               Forgot your password?
             </div>
@@ -278,7 +278,7 @@ const Login = () => {
             ) : (
               <div className="text-center text-sm my-4">
                 Already have an account?
-                <span onClick={toggleState} className="cursor-pointer underline ml-1">
+                <span onClick={toggleState} className="cursor-pointer underline ml-1 text-blue-600 ">
                   Login
                 </span>
               </div>

@@ -42,7 +42,7 @@ const ForgotPassword = () => {
             className="flex flex-col items-start w-[90%] sm:max-w-md m-auto gap-y-5 text-gray-800"
           >
             <div className="w-full mb-4">
-              <h3 className="bold-36  text-blue-600">Forgot Password</h3>
+              <h3 className="bold-36">Forgot Password</h3>
             </div>
             <div>
               <label htmlFor="email" className="medium-14">
