@@ -25,7 +25,10 @@ const Sidebar = ({token ,setToken}) => {
           <MdFactCheck/>
           <div className='hidden lg:flex'>Orders Items</div>
           </NavLink>
-
+<NavLink to={'/order-status'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
+          <MdFactCheck/>
+          <div className='hidden lg:flex'>Orders Status </div>
+          </NavLink>
           
         </div>
         {/* logout button */}
