@@ -2,7 +2,7 @@ import React from 'react'
 import { BiLogOut } from 'react-icons/bi'
 import { FaListAlt } from 'react-icons/fa'
 import { FaSquarePlus } from 'react-icons/fa6'
-import { MdFactCheck } from 'react-icons/md'
+import { MdContactMail, MdFactCheck } from 'react-icons/md'
 import { NavLink } from 'react-router-dom'
 
 const Sidebar = ({token ,setToken}) => {
@@ -20,15 +20,18 @@ const Sidebar = ({token ,setToken}) => {
           <FaListAlt/>
           <div className='hidden lg:flex'>List Items</div>
           </NavLink>
-
-          <NavLink to={'/orders'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
-          <MdFactCheck/>
-          <div className='hidden lg:flex'>Orders Items</div>
-          </NavLink>
-<NavLink to={'/order-status'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
-          <MdFactCheck/>
-          <div className='hidden lg:flex'>Orders Status </div>
-          </NavLink>
+            <NavLink to={'/orders'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
+                  <MdFactCheck/>
+                  <div className='hidden lg:flex'>Orders Items</div>
+                </NavLink>
+                <NavLink to={'/order-status'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
+                  <MdFactCheck/>
+                  <div className='hidden lg:flex'>Orders Status </div>
+                </NavLink>
+                <NavLink to={'/contacts'}  className={({isActive})=> isActive ? 'active-link' : 'flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'}>
+                  <MdContactMail/>
+                  <div className='hidden lg:flex'>Admin Contacts</div>
+                </NavLink>
           
         </div>
         {/* logout button */}

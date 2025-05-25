@@ -46,7 +46,6 @@ const Orders = ({ token }) => {
         fetchAllOrders()
       }
     } catch (error) {
-      console.log(error)
       toast.error('Error updating status')
     }
   }
@@ -56,11 +55,22 @@ const Orders = ({ token }) => {
   }, [token])
 
   // Sắp xếp đơn hàng theo ngày mới nhất lên đầu
-  const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date))
+  const sortedOrders = [...orders].sort((a, b) => b.date - a.date)
 
   // Pagination logic
   const totalPages = Math.ceil(sortedOrders.length / ITEMS_PER_PAGE)
   const paginatedOrders = sortedOrders.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+
+  // Hiển thị màu cho trạng thái
+  const statusColor = (status) => {
+    switch (status) {
+      case 'pending': return 'text-yellow-500';
+      case 'confirmed': return 'text-blue-500';
+      case 'delivered': return 'text-green-600';
+      case 'cancelled': return 'text-red-500';
+      default: return '';
+    }
+  }
 
   return (
     <div className='px-2 sm:px-8'>
@@ -77,21 +87,12 @@ const Orders = ({ token }) => {
               <div className='flex flex-col gap-2'>
                 <div className='medium-14'>Items:</div>
                 <div className='flex flex-col relative top-0.5'>
-                  {order.items.map((item, index) => {
-                    if (index === order.items.length - 1) {
-                      return (
-                        <p key={index}>
-                          {item.name} x {item.quantity} <span>"{item.size}"</span>
-                        </p>
-                      )
-                    } else {
-                      return (
-                        <p key={index}>
-                          {item.name} x {item.quantity} <span>"{item.size}"</span> ,
-                        </p>
-                      )
-                    }
-                  })}
+                  {order.items.map((item, index) => (
+                    <p key={index}>
+                      {item.name} x {item.quantity} <span>"{item.size}"</span>
+                      {index < order.items.length - 1 && ','}
+                    </p>
+                  ))}
                 </div>
               </div>
               <p>
@@ -104,7 +105,7 @@ const Orders = ({ token }) => {
               <span>{order.address.street + ', '}</span>
               <span>
                 {order.address.city +
-                  ' ,' +
+                  ', ' +
                   order.address.state +
                   ', ' +
                   order.address.country +
@@ -120,33 +121,40 @@ const Orders = ({ token }) => {
               </p>
               <p>
                 <span className='text-tertiary medium-14'>Method:</span>
-                {order.items.paymentMethod}
+                {order.paymentMethod}
               </p>
               <p>
                 <span className='text-tertiary medium-14'>Payment:</span>
-                {order.items.payment ? 'Paid' : 'Not Paid'}
+                {order.payment ? 'Paid' : 'Not Paid'}
               </p>
               <p>
                 <span className='text-tertiary medium-14'>Date:</span>
                 {new Date(order.date).toLocaleDateString()}
               </p>
             </div>
-            <p>
-              <span className='text-tertiary medium-14'>Price:</span>
-              {currency}
-              {order.amount}
-            </p>
-            <select
-              onChange={(e) => statusHandler(e, order._id)}
-              value={order.status}
-              className='p-1 ring-1 rounded-md border border-gray-300'
-            >
-              <option value="Order Place">Order Place</option>
-              <option value="Packing">Packing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Out for Delivery">Out for Delivery</option>
-              <option value="Delivered">Delivered</option>
-            </select>
+            <div>
+              <p>
+                <span className='text-tertiary medium-14'>Price:</span>
+                {currency}
+                {order.amount}
+              </p>
+              <p>
+                <span className='text-tertiary medium-14'>Status:</span>
+                <span className={statusColor(order.status) + ' font-semibold ml-2'}>
+                  {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                </span>
+              </p>
+              <select
+                onChange={(e) => statusHandler(e, order._id)}
+                value={order.status}
+                className='p-1 ring-1 rounded-md border border-gray-300 mt-2'
+              >
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
           </div>
         ))}
         {/* Pagination controls */}

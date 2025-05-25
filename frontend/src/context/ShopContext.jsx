@@ -11,7 +11,7 @@ const ShopContextProvider =(props)=>{
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [foods,setFoods]=useState([])
     const navigate = useNavigate()
-    const [token ,setToken]=useState('')
+    const [token, setToken] = useState(localStorage.getItem('token') || '');
     const [cartItems,setCartItems] = useState({})
     
 
@@ -91,7 +91,7 @@ const updateQuantity = async (itemId, size, quantity) => {
 };
 
 
-//getting cart amount
+
 //getting cart amount
 const getCartAmount = () => {
   let totalAmount = 0;
@@ -156,15 +156,19 @@ const getUserCart = async (token) => {
 };
 
 
-
-
 useEffect(() => {
-  if (token && localStorage.getItem('token')) {
-    setToken(localStorage.getItem('token'));
-    getUserCart(localStorage.getItem('token')); // Fetch the cart data once token is set
+  if (token) {
+    getUserCart(token);
   }
-  getProductsData(); // Fetch the food products
+  getProductsData();
 }, [token]);
+// useEffect(() => {
+//   if (token && localStorage.getItem('token')) {
+//     setToken(localStorage.getItem('token'));
+//     getUserCart(localStorage.getItem('token')); // Fetch the cart data once token is set
+//   }
+//   getProductsData(); // Fetch the food products
+// }, [token]);
 
     const contextValue={foods,currency,navigate,cartItems,setCartItems,addToCart,getCartCount,token ,setToken,updateQuantity,getCartAmount,delivery_charge,backendUrl}
 

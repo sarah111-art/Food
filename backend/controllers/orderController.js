@@ -24,7 +24,8 @@ const placeOrder = async (req, res) => {
         address,
         paymentMethod,
         payment: false,
-        date: Date.now()
+        date: Date.now(),
+         status: 'pending' 
       };
   
       const newOrder = new orderModel(orderData);
@@ -107,7 +108,8 @@ const placeOrderStripe = async (req, res) => {
       address,
       paymentMethod: 'stripe',
       payment: false,
-      date: Date.now()
+      date: Date.now(),
+       status: 'pending' 
     }
     const newOrder = new orderModel(orderData)
     await newOrder.save()
@@ -201,6 +203,51 @@ const verifyStripe = async (req, res) => {
     res.json({ success: false, message: error.message })
   }
 }
+//cancel orders
+const cancelOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    const userId = req.userId;
+    const order = await orderModel.findOne({ _id: orderId, userId });
+
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+    if (order.status && order.status !== "pending") {
+      return res.status(400).json({ error: "Order cannot be cancelled" });
+    }
+    // Kiểm tra thời gian đặt hàng
+    const now = Date.now();
+    const orderTime = new Date(order.date).getTime();
+    if (now - orderTime > 2 * 60 * 1000) {
+      return res.status(400).json({ error: "Cancel time expired (over 2 minutes)" });
+    }
+
+    order.status = "cancelled";
+    await order.save();
+    res.json({ success: true, message: "Order cancelled" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
+//order detail
+const orderDetail = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    // Nếu là user, chỉ cho xem đơn của mình (nếu cần bảo mật)
+    const userId = req.userId;
+    const order = await orderModel.findOne({ _id: orderId, userId });
+    //const order = await orderModel.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    res.json({ success: true, order });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export {
     placeOrder,
@@ -208,6 +255,9 @@ export {
     allOrders,
     userOrders,
     UpdateStatus,
-    verifyStripe
+    verifyStripe, 
+    cancelOrder,
+    orderDetail,
+
 }
 

@@ -48,7 +48,8 @@ const OrderStatus = ({ token }) => {
   return (
     <div className="px-2 sm:px-8 my-8">
       <div className="bg-white p-4 rounded shadow">
-        <h2 className="font-bold mb-4">Thống kê đơn hàng theo ngày</h2>
+        <h2 className="font-bold mb-4">
+Order statistics by day</h2>
         <ResponsiveContainer width={500} height={500}>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
