@@ -38,15 +38,16 @@ const SOCIALS ={
                 <img src={footer} alt='' className='rounded-md mt-6 w-44'/>
               </div>
             </div>
-            {FOOTER_LINKS.map((col) => (
+           {FOOTER_LINKS.map((col) => (
   <FooterColumn key={col.title} title={col.title}>
     <ul className='flex flex-col gap-4 regular-14 text-gray-20'>
       {col.links.map((link) => (
-        <Link to={'/'} key={link}>{link}</Link>
+        <Link to={link.url} key={link.label}>{link.label}</Link>
       ))}
     </ul>
   </FooterColumn>
 ))}
+
 
             <div>
               <FooterColumn title={FOOTER_CONTACT_INFO.title}>

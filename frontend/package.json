@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
     "axios": "^1.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^6.30.0",
     "react-toastify": "^11.0.5",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.8.1",
     "validator": "^13.15.0"
   },
   "devDependencies": {

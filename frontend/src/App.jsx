@@ -14,6 +14,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import OrderStatus from './pages/OrderStatus'
+import AboutUs from './pages/AboutUs'
+import PopularFood from './components/PopularFood'
 
 
 
@@ -33,6 +35,8 @@ const App = () => {
       <Route path="/forgot-password" element={<ForgotPassword/>} />
       <Route path="/reset-password" element={<ResetPassword/>} />
         <Route path="/order/:id" element={<OrderStatus />} />
+           <Route path="/about-us" element={<AboutUs />} />
+               <Route path="/popular-foods" element={<PopularFood />} />
     </Routes>
     <ToastContainer />
     </main>

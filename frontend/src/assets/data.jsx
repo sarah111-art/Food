@@ -678,23 +678,22 @@ export const FOOTER_LINKS = [
   {
     title: "Learn More",
     links: [
-      "About Us",
-      "Fresh Foods",
-      "Fast Foods",
-      "Hot Deals",
-      "Popular Foods",
-      "FAQ",
+        { label: "About Us", url: "/about-us" },
+      { label: "Fresh Foods", url: "/menu" },
+      { label: "Fast Foods", url: "/menu" },
+      { label: "Popular Foods", url: "/popular-foods" },
+      { label: "FAQ", url: "/contact" },
     ],
-  },
-  {
-    title: "Our Community",
-    links: [
-      "Terms and Conditions",
-      "Special Offers",
-      "Customer Reviews",
-    ],
-  },
-];
+  },]
+//   {
+//     title: "Our Community",
+//     links: [
+//         { label: "Terms and Conditions", url: "/terms" },
+//       { label: "Special Offers", url: "/special-offers" },
+//       { label: "Customer Reviews", url: "/reviews" },
+//     ],
+//   },
+// ];
 
 export const FOOTER_CONTACT_INFO = {
   title: "Contact Us",

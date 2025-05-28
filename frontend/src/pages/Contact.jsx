@@ -27,7 +27,7 @@ const Contact = () => {
   }
 
   return (
-    <section className="max-padd-container mt-24">
+    <section className="max-padd-container mt-5 w-full">
       <div className="flex flex-col items-center">
         <h2 className="text-2xl font-bold mb-8 text-secondary">Contact Us</h2>
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
@@ -107,7 +107,7 @@ const Contact = () => {
               onClick={() => navigate('/')}
               className="bg-primary text-secondary py-2 px-6 rounded-md hover:bg-primary-dark"
             >
-              Quay về trang chủ
+              Back to Home
             </button>
           </div>
       <Footer/>

@@ -93,7 +93,7 @@ const Item = ({ food }) => {
   return (
     <div className='rounded-xl bg-white relative'>
       {/* photo */}
-      <div className='flexCenter m-6 rounded-full absolute left-0 right-0 -top-[99px] '>
+      <div className='flexCenter m-6 rounded-full absolute left-0 right-0 -top-[99px] pizza-spin'>
         <img
           src={food.image}
           alt={food.name}

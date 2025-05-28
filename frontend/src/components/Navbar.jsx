@@ -1,7 +1,7 @@
 import React from 'react'
 import { TbHomeFilled } from 'react-icons/tb'
 import { IoMdListBox } from 'react-icons/io'
-import { IoMailOpen } from 'react-icons/io5'
+import { IoMailOpen, IoPersonCircle } from 'react-icons/io5'
 import { FaRegWindowClose } from 'react-icons/fa'
 import { Link ,NavLink} from 'react-router-dom'
 const Navbar = ({containerStyles,toggleMenu,menuOpened}) => {
@@ -9,6 +9,8 @@ const Navbar = ({containerStyles,toggleMenu,menuOpened}) => {
     { to: '/',label:'Home',icon:<TbHomeFilled/>},
     { to: '/menu',label:'Menu',icon:<IoMdListBox/>},
     { to: '/contact',label:'Contact',icon:<IoMailOpen/>},
+  { to: '/about-us', label: 'About Us', icon: <IoPersonCircle /> }
+
 
   ]
   return (
