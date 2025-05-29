@@ -15,7 +15,9 @@ connectDB(); // Connect to MongoDB
 connectCloudinary(); // Connect to Cloudinary
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://food-frontend-rouge.vercel.app'
+}));
 
 //api endpoints
 app.use('/api/user',userRoute);
