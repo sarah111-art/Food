@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Login from './components/Login'
 import OrderStatus from './page/OrderStatus'
 import AdminContacts from './page/AdminContacts'
+import Edit from './page/Edit'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/orders" element={<Orders token={token}/>} />
             <Route path="/order-status" element={<OrderStatus token={token} />} />
              <Route path="/contacts" element={<AdminContacts token={token} />} /> 
+               <Route path="/edit/:id" element={<Edit />} />
             </Routes>
         </div>
       </div>
